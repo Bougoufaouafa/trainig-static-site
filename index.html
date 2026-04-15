@@ -9,22 +9,41 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg,#141e30,#243b55);
     color: white;
 }
 
 /* HEADER */
 header {
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
 }
 
 header h1 {
-    font-size: 45px;
+    margin: 10px 0;
 }
 
 header p {
     opacity: 0.8;
+}
+
+/* BUTTON */
+.btn {
+    background: #00c6ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* CONTAINER */
@@ -35,7 +54,7 @@ header p {
 
 /* SECTION */
 .section {
-    margin: 50px 0;
+    margin: 40px 0;
 }
 
 /* CARD */
@@ -45,29 +64,47 @@ header p {
     border-radius: 15px;
     backdrop-filter: blur(10px);
     margin: 15px 0;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
 }
 
 /* GRID */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     gap: 20px;
 }
 
-/* BUTTON */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
+/* SKILLS BAR */
+.skill {
+    margin: 10px 0;
+}
+
+.bar {
+    height: 8px;
+    background: #333;
+    border-radius: 10px;
+}
+
+.fill {
+    height: 100%;
     background: #00c6ff;
-    color: black;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* ANIMATION */
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* FOOTER */
@@ -83,49 +120,49 @@ footer {
 <body>
 
 <header>
+    <img src="https://i.imgur.com/6VBx3io.png" class="profile-img">
     <h1>👩‍💻 Bougoufa Ouafa</h1>
-    <p>Étudiante en informatique | Développement Web & Cloud</p>
+    <p>Étudiante en informatique | Web & Cloud</p>
+    <a href="#" class="btn">📄 Télécharger CV</a>
 </header>
 
 <div class="container">
 
-<!-- ABOUT -->
-<div class="section">
+<div class="section fade">
     <h2>👤 Profil</h2>
     <div class="card">
-        Étudiante passionnée par le développement web et le cloud computing. Motivé à apprendre et créer des solutions modernes.
+        Étudiante passionnée par le développement web et le cloud computing. Créative et motivée pour réaliser des projets modernes.
     </div>
 </div>
 
-<!-- SKILLS -->
-<div class="section">
+<div class="section fade">
     <h2>💡 Compétences</h2>
-    <div class="grid">
-        <div class="card">HTML / CSS</div>
-        <div class="card">JavaScript</div>
-        <div class="card">Java</div>
-        <div class="card">Cloud (Render)</div>
+    <div class="card">
+        <div class="skill">HTML / CSS
+            <div class="bar"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill">JavaScript
+            <div class="bar"><div class="fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill">Java
+            <div class="bar"><div class="fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill">Cloud (Render)
+            <div class="bar"><div class="fill" style="width:80%"></div></div>
+        </div>
     </div>
 </div>
 
-<!-- PROJECTS -->
-<div class="section">
+<div class="section fade">
     <h2>🚀 Projets</h2>
     <div class="grid">
-        <div class="card">
-            Portfolio Static Site  
-        </div>
-        <div class="card">
-            Restaurant Website  
-        </div>
-        <div class="card">
-            Backend avec Database  
-        </div>
+        <div class="card">🌐 Portfolio Static Site</div>
+        <div class="card">🍽 Restaurant Website</div>
+        <div class="card">☁️ Backend + Database</div>
     </div>
 </div>
 
-<!-- CONTACT -->
-<div class="section">
+<div class="section fade">
     <h2>📞 Contact</h2>
     <div class="card">
         Email: example@email.com <br>
@@ -138,6 +175,21 @@ footer {
 <footer>
     © 2026 - CV Professionnel
 </footer>
+
+<script>
+const elements = document.querySelectorAll(".fade");
+
+window.addEventListener("scroll", () => {
+    elements.forEach(el => {
+        const position = el.getBoundingClientRect().top;
+        const screen = window.innerHeight;
+
+        if(position < screen - 100){
+            el.classList.add("show");
+        }
+    });
+});
+</script>
 
 </body>
 </html>
